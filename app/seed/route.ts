@@ -1,11 +1,8 @@
 import bcrypt from "bcrypt";
-import { createPool } from "@vercel/postgres";
+import { db } from "@vercel/postgres";
 import { invoices, customers, revenue, users } from "../lib/placeholder-data";
 
-const pool = createPool({
-  connectionString:process.env.POSTGRES_URL_CUSTOM,
-})
-const client = await pool.connect();
+const client = await db.connect();
 
 async function seedUsers() {
   await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
